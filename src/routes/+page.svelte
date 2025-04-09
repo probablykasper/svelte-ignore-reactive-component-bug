@@ -1,2 +1,15 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import { onMount } from 'svelte'
+
+	let MyComponent: typeof import('./MyComponent.svelte').default | undefined
+	onMount(() => {
+		import('./MyComponent.svelte').then((component) => {
+			MyComponent = component.default
+		})
+	})
+</script>
+
+{#if MyComponent}
+	<!-- svelte-ignore reactive-component -->
+	<MyComponent />
+{/if}
